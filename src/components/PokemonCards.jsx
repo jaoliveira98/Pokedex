@@ -1,12 +1,10 @@
 import React from "react";
-
 const data = [
 	{ id: 1, name: "Bulbasaur", type: ["Grass", "Poisen"] },
 	{ id: 2, name: "Ivysaur", type: ["Grass", "Poisen"] },
 	{ id: 3, name: "Venusaur", type: ["Grass", "Poisen"] },
 	{ id: 4, name: "Charmander", type: ["Fire"] },
 ];
-
 const PokemonCards = () => {
 	return (
 		<>
@@ -21,5 +19,4 @@ const PokemonCards = () => {
 		</>
 	);
 };
-
 export default PokemonCards;
