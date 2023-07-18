@@ -1,5 +1,5 @@
 // HomePage.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FilterFixed from "../components/FilterFixed";
 import PokeCard from "../components/PokeCard";
 import PokeTypeTag from "../components/PokeTypeTag";
@@ -8,31 +8,39 @@ import usePokemonsDetails from "../hooks/usePokemonsDetails";
 import { useSearch } from "../hooks/useSearch";
 import Pagination from "../components/Pagination";
 
+const POKEMONS_PER_PAGE = 24;
+
 const HomePage = () => {
 	// Data
 	const pokemons = usePokemonsDetails();
 
 	// Search
-	const { setSearch, filteredPokemons } = useSearch(pokemons);
+	const { search, setSearch, filteredPokemons } = useSearch(pokemons);
 
 	// Pagination
 	const [currentPage, setCurrentPage] = useState(1);
-	const pokemonsPerPage = 12;
-	const lastIndex = currentPage * pokemonsPerPage;
-	const firstIndex = lastIndex - pokemonsPerPage;
-	const records = filteredPokemons.slice(firstIndex, lastIndex);
-	const numPage = Math.ceil(filteredPokemons.length / pokemonsPerPage);
+
+	const lastIndex = currentPage * POKEMONS_PER_PAGE;
+	const firstIndex = lastIndex - POKEMONS_PER_PAGE;
+	const currentPagePokemons = filteredPokemons.slice(firstIndex, lastIndex);
+
+	// It's the number of pages that will be needed to show all Pokemons
+	const numPages = Math.ceil(filteredPokemons.length / POKEMONS_PER_PAGE);
 
 	const previousPage = () => {
 		if (currentPage !== 1) return setCurrentPage(currentPage - 1);
 	};
 	const nextPage = () => {
-		if (currentPage !== numPage) return setCurrentPage(currentPage + 1);
+		if (currentPage !== numPages) return setCurrentPage(currentPage + 1);
 	};
 
 	const changeCurrentPage = (id) => {
 		return setCurrentPage(id);
 	};
+
+	useEffect(() => {
+		setCurrentPage(1);
+	}, [search]);
 
 	return (
 		<>
@@ -48,14 +56,14 @@ const HomePage = () => {
 						</div>
 					</div>
 					<div className="grid grid-cols-1 my-5 gap-4 md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2">
-						{records.map((pokemon) => (
+						{currentPagePokemons.map((pokemon) => (
 							<PokeCard key={pokemon.name} pokemon={pokemon} />
 						))}
 					</div>
 
 					<Pagination
 						currentPage={currentPage}
-						numPage={numPage}
+						numPages={numPages}
 						previousPage={previousPage}
 						nextPage={nextPage}
 						changeCurrentPage={changeCurrentPage}

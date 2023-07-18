@@ -11,5 +11,5 @@ export const useSearch = (pokemons) => {
 		[pokemons, search]
 	);
 
-	return { setSearch, filteredPokemons };
+	return { search, setSearch, filteredPokemons };
 };
