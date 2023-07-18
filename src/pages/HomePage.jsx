@@ -1,19 +1,39 @@
-import React, { useEffect } from "react";
-import VerticalNavbar from "../components/VerticalNavbar";
-import SearchInput from "../components/SearchInput";
-import PokemonCards from "../components/PokemonCards";
+import FilterFixed from "../components/FilterFixed";
+import PokeCard from "../components/PokeCard";
+import PokeTypeTags from "../components/PokeTypeTags";
+import SearchInput from "../components/inputs/SearchInput";
+import usePokemonsDetails from "../hooks/usePokemonsDetails";
+import { useState } from "react";
 
 const HomePage = () => {
+	const pokemons = usePokemonsDetails();
+
+	const [query, setQuery] = useState("");
+	// console.log(pokemons.filter((user) => user.name.includes("bu")));
 	return (
-		<div className="overflow-hidden">
-			<div className="max-w-8xl mx-auto px-4 sm:px-6 md:px-8">
-				<VerticalNavbar />
+		<>
+			<div className="container mx-auto">
+				<div>
+					<div className="grid grid-cols-2 items-center gap-4">
+						<div className="flex items-center gap-10">
+							<h1 className="text-2xl text-slate-800">Pokedex</h1>
+							<SearchInput onChange={(e) => setQuery(e.target.value)} />
+						</div>
+						<div className="flex gap-4 overflow-x-scroll">
+							<PokeTypeTags />
+						</div>
+					</div>
+
+					<div className="grid grid-cols-1 my-5 gap-4 md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2">
+						{pokemons?.map((pokemon) => (
+							<PokeCard key={pokemon.name} pokemon={pokemon} />
+						))}
+					</div>
+				</div>
 			</div>
-			<div className="lg:pl-[19.5rem]">
-				<SearchInput />
-				<PokemonCards />
-			</div>
-		</div>
+
+			<FilterFixed filterOne="1" filterTwo="2" />
+		</>
 	);
 };
 
