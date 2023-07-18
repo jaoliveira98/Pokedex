@@ -1,7 +1,7 @@
 import useTypes from "../hooks/useTypes";
 import { typeProperties } from "../utils/type";
 
-const PokeTypeTags = () => {
+const PokeTypeTag = () => {
 	const data = useTypes();
 
 	const getIcon = (type) => {
@@ -14,7 +14,7 @@ const PokeTypeTags = () => {
 			{data?.results.map((entry) => (
 				<div
 					key={entry.name}
-					className="drop-shadow-md border rounded-full px-6 w-auto py-2 bg-white text-sm text-slate-800 my-5 flex items-center gap-1.5"
+					className="drop-shadow-md border rounded-full px-6 w-auto py-2 bg-white text-sm text-slate-800 flex items-center gap-2"
 				>
 					{getIcon(entry.name)}
 					<p className="capitalize">{entry.name}</p>
@@ -24,4 +24,4 @@ const PokeTypeTags = () => {
 	);
 };
 
-export default PokeTypeTags;
+export default PokeTypeTag;
