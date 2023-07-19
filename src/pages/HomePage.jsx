@@ -1,46 +1,38 @@
-// HomePage.js
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import FilterFixed from "../components/FilterFixed";
+import Pagination from "../components/Pagination";
 import PokeCard from "../components/PokeCard";
 import PokeTypeTag from "../components/PokeTypeTag";
 import SearchInput from "../components/inputs/SearchInput";
+import usePagination from "../hooks/usePagination";
 import usePokemonsDetails from "../hooks/usePokemonsDetails";
 import { useSearch } from "../hooks/useSearch";
-import Pagination from "../components/Pagination";
-
-const POKEMONS_PER_PAGE = 24;
+import { HiChevronRight, HiChevronLeft } from "react-icons/hi2";
+import useScroll from "../hooks/useScroll";
 
 const HomePage = () => {
-	// Data
 	const pokemons = usePokemonsDetails();
-
-	// Search
 	const { search, setSearch, filteredPokemons } = useSearch(pokemons);
-
-	// Pagination
-	const [currentPage, setCurrentPage] = useState(1);
-
-	const lastIndex = currentPage * POKEMONS_PER_PAGE;
-	const firstIndex = lastIndex - POKEMONS_PER_PAGE;
-	const currentPagePokemons = filteredPokemons.slice(firstIndex, lastIndex);
-
-	// It's the number of pages that will be needed to show all Pokemons
-	const numPages = Math.ceil(filteredPokemons.length / POKEMONS_PER_PAGE);
-
-	const previousPage = () => {
-		if (currentPage !== 1) return setCurrentPage(currentPage - 1);
-	};
-	const nextPage = () => {
-		if (currentPage !== numPages) return setCurrentPage(currentPage + 1);
-	};
-
-	const changeCurrentPage = (id) => {
-		return setCurrentPage(id);
-	};
+	const {
+		currentPage,
+		numPages,
+		previousPage,
+		nextPage,
+		currentPageData: currentPagePokemons,
+		setCurrentPage,
+	} = usePagination(filteredPokemons);
 
 	useEffect(() => {
 		setCurrentPage(1);
 	}, [search]);
+
+	const {
+		scrollRef,
+		showLeftButton,
+		showRightButton,
+		handleScrollLeft,
+		handleScrollRight,
+	} = useScroll();
 
 	return (
 		<>
@@ -51,8 +43,26 @@ const HomePage = () => {
 							<h1 className="text-2xl text-slate-800">Pokedex</h1>
 							<SearchInput onChange={(e) => setSearch(e.target.value)} />
 						</div>
-						<div className="flex gap-4 overflow-x-scroll my-5">
-							<PokeTypeTag />
+						<div className="flex items-center gap-4">
+							{showLeftButton && (
+								<button
+									onClick={handleScrollLeft}
+									className="drop-shadow border rounded-full bg-white p-2"
+								>
+									<HiChevronLeft />
+								</button>
+							)}
+							<div ref={scrollRef} className="flex gap-4 overflow-hidden p-5">
+								<PokeTypeTag />
+							</div>
+							{showRightButton && (
+								<button
+									onClick={handleScrollRight}
+									className="drop-shadow border rounded-full bg-white p-2"
+								>
+									<HiChevronRight />
+								</button>
+							)}
 						</div>
 					</div>
 					<div className="grid grid-cols-1 my-5 gap-4 md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2">
@@ -60,17 +70,15 @@ const HomePage = () => {
 							<PokeCard key={pokemon.name} pokemon={pokemon} />
 						))}
 					</div>
-
 					<Pagination
 						currentPage={currentPage}
 						numPages={numPages}
 						previousPage={previousPage}
 						nextPage={nextPage}
-						changeCurrentPage={changeCurrentPage}
+						changeCurrentPage={setCurrentPage}
 					/>
 				</div>
 			</div>
-
 			<FilterFixed filterOne="1" filterTwo="2" />
 		</>
 	);
