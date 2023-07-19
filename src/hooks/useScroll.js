@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const SCROLL_AMOUNT = 400;
 
@@ -7,7 +7,7 @@ const useScroll = () => {
 	const [showLeftButton, setShowLeftButton] = useState(false);
 	const [showRightButton, setShowRightButton] = useState(true);
 
-	const handleScrollLeft = () => {
+	const handleScrollLeft = useCallback(() => {
 		// Scroll left if container exists
 		if (scrollRef.current) {
 			scrollRef.current.scroll({
@@ -15,9 +15,9 @@ const useScroll = () => {
 				behavior: "smooth",
 			});
 		}
-	};
+	}, []);
 
-	const handleScrollRight = () => {
+	const handleScrollRight = useCallback(() => {
 		// Scroll right if container exists
 		if (scrollRef.current) {
 			scrollRef.current.scroll({
@@ -25,7 +25,7 @@ const useScroll = () => {
 				behavior: "smooth",
 			});
 		}
-	};
+	}, []);
 
 	useEffect(() => {
 		const handleScroll = () => {
