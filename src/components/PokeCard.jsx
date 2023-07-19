@@ -17,7 +17,7 @@ const PokeCard = ({ pokemon }) => {
 
 	return (
 		<a>
-			<div className="drop-shadow-md border rounded-md px-6 py-8 bg-white flex items-center justify-between">
+			<div className="drop-shadow border rounded-md px-6 py-8 bg-white flex items-center justify-between">
 				<div>
 					<h1 className="capitalize text-lg font-semibold text-slate-800">
 						{pokemon.name}
