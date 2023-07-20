@@ -4,11 +4,17 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/Homepage";
+import Favorites from "./pages/Favorites";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <HomePage />,
+		errorElement: <ErrorPage />,
+	},
+	{
+		path: "/favorites",
+		element: <Favorites />,
 		errorElement: <ErrorPage />,
 	},
 ]);

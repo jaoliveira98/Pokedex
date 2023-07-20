@@ -10,7 +10,7 @@ const PokeTypeIcon = ({ type }) => {
 	return (
 		<>
 			<div
-				className={`${typeProperties[type].color} h-[32px] w-[32px] rounded-full flex items-center justify-center drop-shadow-sm border text-white`}
+				className={`${typeProperties[type].color} p-2 rounded-full flex items-center justify-center shadow text-white text-xs`}
 			>
 				{getIcon(type)}
 			</div>

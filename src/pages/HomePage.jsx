@@ -9,6 +9,8 @@ import usePokemonsDetails from "../hooks/usePokemonsDetails";
 import { useSearch } from "../hooks/useSearch";
 import { HiChevronRight, HiChevronLeft } from "react-icons/hi2";
 import useScroll from "../hooks/useScroll";
+import PrimaryBtn from "../components/buttons/PrimaryBtn";
+import Logo from "../assets/Logo.png";
 
 const HomePage = () => {
 	const pokemons = usePokemonsDetails();
@@ -40,30 +42,22 @@ const HomePage = () => {
 				<div className="px-3 sm:p-0">
 					<div className="grid grid-cols-1 md:grid-cols-2 items-center md:gap-4">
 						<div className="flex items-center gap-10">
-							<h1 className="text-2xl text-slate-800 hidden md:block">
-								Pokedex
-							</h1>
+							<img src={Logo} alt="Imagemzita" />
 							<SearchInput onChange={(e) => setSearch(e.target.value)} />
 						</div>
 						<div className="flex items-center gap-4">
 							{showLeftButton && (
-								<button
-									onClick={handleScrollLeft}
-									className="drop-shadow border rounded-full bg-white p-2 hover:bg-gray-100 active:bg-white"
-								>
+								<PrimaryBtn onClick={handleScrollLeft}>
 									<HiChevronLeft />
-								</button>
+								</PrimaryBtn>
 							)}
 							<div ref={scrollRef} className="flex gap-4 overflow-hidden p-5">
 								<PokeTypeTag />
 							</div>
 							{showRightButton && (
-								<button
-									onClick={handleScrollRight}
-									className="drop-shadow border rounded-full bg-white p-2 hover:bg-gray-100 active:bg-white"
-								>
+								<PrimaryBtn onClick={handleScrollRight}>
 									<HiChevronRight />
-								</button>
+								</PrimaryBtn>
 							)}
 						</div>
 					</div>

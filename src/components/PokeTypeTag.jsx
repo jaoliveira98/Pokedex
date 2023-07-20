@@ -14,7 +14,7 @@ const PokeTypeTag = () => {
 			{data?.results.map((entry) => (
 				<div
 					key={entry.name}
-					className="drop-shadow-md border rounded-full px-6 w-auto py-2 bg-white text-sm text-slate-800 flex items-center gap-2"
+					className="shadow rounded-full px-6 w-auto py-2 bg-white text-sm text-slate-800 flex items-center gap-2"
 				>
 					{getIcon(entry.name)}
 					<p className="capitalize">{entry.name}</p>

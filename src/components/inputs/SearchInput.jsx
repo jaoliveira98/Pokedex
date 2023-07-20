@@ -3,7 +3,7 @@ const SearchInput = ({ onChange, value }) => {
 		<input
 			onChange={onChange}
 			value={value}
-			className="w-full drop-shadow border rounded-md px-6 py-4 bg-white text-xs text-slate-400 my-5"
+			className="w-full shadow rounded-md px-6 py-4 bg-white text-xs text-slate-400 my-5 focus:border focus:border-red-700"
 			placeholder="Search for a Pokemon!"
 		/>
 	);
