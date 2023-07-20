@@ -37,17 +37,19 @@ const HomePage = () => {
 	return (
 		<>
 			<div className="container mx-auto">
-				<div>
-					<div className="grid grid-cols-2 items-center gap-4">
+				<div className="px-3 sm:p-0">
+					<div className="grid grid-cols-1 md:grid-cols-2 items-center md:gap-4">
 						<div className="flex items-center gap-10">
-							<h1 className="text-2xl text-slate-800">Pokedex</h1>
+							<h1 className="text-2xl text-slate-800 hidden md:block">
+								Pokedex
+							</h1>
 							<SearchInput onChange={(e) => setSearch(e.target.value)} />
 						</div>
 						<div className="flex items-center gap-4">
 							{showLeftButton && (
 								<button
 									onClick={handleScrollLeft}
-									className="drop-shadow border rounded-full bg-white p-2"
+									className="drop-shadow border rounded-full bg-white p-2 hover:bg-gray-100 active:bg-white"
 								>
 									<HiChevronLeft />
 								</button>
@@ -58,7 +60,7 @@ const HomePage = () => {
 							{showRightButton && (
 								<button
 									onClick={handleScrollRight}
-									className="drop-shadow border rounded-full bg-white p-2"
+									className="drop-shadow border rounded-full bg-white p-2 hover:bg-gray-100 active:bg-white"
 								>
 									<HiChevronRight />
 								</button>

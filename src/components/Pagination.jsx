@@ -1,5 +1,6 @@
 // Pagination.js
 import React from "react";
+import { HiChevronRight, HiChevronLeft } from "react-icons/hi2";
 
 const Pagination = ({
 	currentPage,
@@ -14,23 +15,20 @@ const Pagination = ({
 		<nav>
 			<ul className="flex items-center justify-between">
 				<li>
-					<a href="#" onClick={previousPage}>
-						Prev
+					<a
+						href="#"
+						onClick={previousPage}
+						className="flex items-center gap-2 drop-shadow border rounded-full bg-white py-2 px-5 hover:bg-gray-100 active:bg-white text-sm"
+					>
+						<HiChevronLeft /> Prev
 					</a>
 				</li>
 				<ul className="flex items-center justify-center gap-4 ">
 					{numbers.map((n, i) => (
-						<a
-							key={i}
-							href="#"
-							onClick={() => changeCurrentPage(n)}
-							className="active:scale-75 transition duration-75 ease-in-out"
-						>
+						<a key={i} href="#" onClick={() => changeCurrentPage(n)}>
 							<li
-								className={`flex items-center justify-center rounded-md border h-[32px] w-[32px] drop-shadow-md ${
-									currentPage === n
-										? "bg-red-700 text-white scale-125 "
-										: "bg-white"
+								className={`flex items-center justify-center${
+									currentPage === n ? "bg-red-700" : "bg-white"
 								}`}
 							>
 								{n}
@@ -39,8 +37,12 @@ const Pagination = ({
 					))}
 				</ul>
 				<li>
-					<a href="#" onClick={nextPage}>
-						Next
+					<a
+						href="#"
+						onClick={nextPage}
+						className="flex items-center gap-2 drop-shadow border rounded-full bg-white py-2 px-5 hover:bg-gray-100 active:bg-white text-sm"
+					>
+						Next <HiChevronRight />
 					</a>
 				</li>
 			</ul>
