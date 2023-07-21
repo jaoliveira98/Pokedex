@@ -2,7 +2,7 @@ import PokeTypeIcon from "./PokeTypeIcon";
 import { GrRotateRight } from "react-icons/gr";
 import { useState } from "react";
 
-const PokeCard = ({ pokemon }) => {
+const PokeCard = ({ pokemon, selectedType }) => {
 	const [isRotated, setIsRotated] = useState(false);
 
 	const AddZero = () => {
@@ -57,7 +57,11 @@ const PokeCard = ({ pokemon }) => {
 				<div className="flex items-center flex-col gap-2">
 					{/* Display the types for each Pokemon */}
 					{pokemon.types?.map((entry) => (
-						<PokeTypeIcon key={entry.type.name} type={entry.type.name} />
+						<PokeTypeIcon
+							key={entry.type.name}
+							type={entry.type.name}
+							selectedType={selectedType}
+						/>
 					))}
 				</div>
 			</div>

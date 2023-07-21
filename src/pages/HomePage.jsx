@@ -14,7 +14,8 @@ import Logo from "../assets/Logo.png";
 
 const Homepage = () => {
 	const pokemons = usePokemonsDetails();
-	const { search, setSearch, filteredPokemons } = useSearch(pokemons);
+	const { search, setSearch, selectedType, setSelectedType, filteredPokemons } =
+		useSearch(pokemons);
 	const {
 		currentPage,
 		numPages,
@@ -51,8 +52,14 @@ const Homepage = () => {
 									<HiChevronLeft />
 								</PrimaryBtn>
 							)}
-							<div ref={scrollRef} className="flex gap-4 overflow-hidden p-5">
-								<PokeTypeTag />
+							<div
+								ref={scrollRef}
+								className="relative flex gap-4 overflow-hidden p-5"
+							>
+								<PokeTypeTag
+									selectedType={selectedType}
+									setSelectedType={setSelectedType}
+								/>
 							</div>
 							{showRightButton && (
 								<PrimaryBtn onClick={handleScrollRight}>
@@ -63,7 +70,11 @@ const Homepage = () => {
 					</div>
 					<div className="grid grid-cols-1 my-5 gap-4 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2">
 						{currentPagePokemons.map((pokemon) => (
-							<PokeCard key={pokemon.name} pokemon={pokemon} />
+							<PokeCard
+								key={pokemon.name}
+								pokemon={pokemon}
+								selectedType={selectedType}
+							/>
 						))}
 					</div>
 					<Pagination

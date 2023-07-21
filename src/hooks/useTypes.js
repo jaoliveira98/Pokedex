@@ -11,7 +11,6 @@ const useTypes = () => {
 		};
 		fecthData();
 	}, []);
-
 	return data;
 };
 
