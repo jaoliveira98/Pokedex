@@ -12,7 +12,7 @@ import useScroll from "../hooks/useScroll";
 import PrimaryBtn from "../components/buttons/PrimaryBtn";
 import Logo from "../assets/Logo.png";
 
-const HomePage = () => {
+const Homepage = () => {
 	const pokemons = usePokemonsDetails();
 	const { search, setSearch, filteredPokemons } = useSearch(pokemons);
 	const {
@@ -61,7 +61,7 @@ const HomePage = () => {
 							)}
 						</div>
 					</div>
-					<div className="grid grid-cols-1 my-5 gap-4 md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2">
+					<div className="grid grid-cols-1 my-5 gap-4 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2">
 						{currentPagePokemons.map((pokemon) => (
 							<PokeCard key={pokemon.name} pokemon={pokemon} />
 						))}
@@ -80,4 +80,4 @@ const HomePage = () => {
 	);
 };
 
-export default HomePage;
+export default Homepage;
