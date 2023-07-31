@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const POKEMONS_PER_PAGE = 16;
+const POKEMONS_PER_PAGE = 12;
 
 const usePagination = (data) => {
 	const [currentPage, setCurrentPage] = useState(1);
