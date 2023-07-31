@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getPokemons } from "../api/getPokemons";
 
 const usePokemons = () => {
-	const [data, setData] = useState(null);
+	const [data, setData] = useState();
 
 	useEffect(() => {
 		const fetchData = async () => {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import FilterFixed from "../components/FilterFixed";
 import Pagination from "../components/Pagination";
 import PokeCard from "../components/PokeCard";
@@ -11,11 +11,14 @@ import { HiChevronRight, HiChevronLeft } from "react-icons/hi2";
 import useScroll from "../hooks/useScroll";
 import PrimaryBtn from "../components/buttons/PrimaryBtn";
 import Logo from "../assets/Logo.png";
+import { PokemonList } from '../App';
 
-const Homepage = () => {
-	const pokemons = usePokemonsDetails();
+const HomePage = () => {
+	const pokemons = useContext(PokemonList);
+
 	const { search, setSearch, selectedType, setSelectedType, filteredPokemons } =
 		useSearch(pokemons);
+
 	const {
 		currentPage,
 		numPages,
@@ -23,11 +26,7 @@ const Homepage = () => {
 		nextPage,
 		currentPageData: currentPagePokemons,
 		setCurrentPage,
-	} = usePagination(filteredPokemons);
-
-	useEffect(() => {
-		setCurrentPage(1);
-	}, [search]);
+	} = usePagination(filteredPokemons || []);
 
 	const {
 		scrollRef,
@@ -36,6 +35,10 @@ const Homepage = () => {
 		handleScrollLeft,
 		handleScrollRight,
 	} = useScroll();
+
+	useEffect(() => {
+		setCurrentPage(1);
+	}, [search]);
 
 	return (
 		<>
@@ -91,4 +94,4 @@ const Homepage = () => {
 	);
 };
 
-export default Homepage;
+export default HomePage;
