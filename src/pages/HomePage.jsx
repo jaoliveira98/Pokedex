@@ -11,7 +11,7 @@ import { HiChevronRight, HiChevronLeft } from "react-icons/hi2";
 import useScroll from "../hooks/useScroll";
 import PrimaryBtn from "../components/buttons/PrimaryBtn";
 import Logo from "../assets/Logo.png";
-import { PokemonList } from '../App';
+import { PokemonList } from "../App";
 
 const HomePage = () => {
 	const pokemons = useContext(PokemonList);
@@ -40,6 +40,10 @@ const HomePage = () => {
 		setCurrentPage(1);
 	}, [search]);
 
+	if (!pokemons) {
+		return <p className="flex items-center justify-center h-[100vh]">Loading...</p>;
+	}
+
 	return (
 		<>
 			<div className="container mx-auto">
@@ -57,8 +61,7 @@ const HomePage = () => {
 							)}
 							<div
 								ref={scrollRef}
-								className="relative flex gap-4 overflow-hidden p-5"
-							>
+								className="relative flex gap-4 overflow-hidden p-5">
 								<PokeTypeTag
 									selectedType={selectedType}
 									setSelectedType={setSelectedType}
