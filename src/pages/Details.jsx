@@ -7,8 +7,9 @@ const Details = () => {
 	const { pokemonName } = useParams();
 	const pokemons = useContext(PokemonList);
 	const pokemon = pokemons?.find((pokemon) => pokemon?.name == pokemonName);
+	const evolutionChain = useEvolution(pokemon?.id);
 
-	if(!pokemon){
+	if (!pokemon) {
 		return <>Loading</>;
 	}
 
@@ -34,6 +35,12 @@ const Details = () => {
 					{type.type.name}
 				</p>
 			))}
+
+			<h1 className="capitalize text-xl font-semibold text-slate-800 mt-5">
+				Evolutions:
+			</h1>
+
+			{evolutionChain?.chain.evolves_to[0].species.name ?? <>Not found</>}
 
 			<h1 className="capitalize text-xl font-semibold text-slate-800 mt-5">
 				Abilities:
